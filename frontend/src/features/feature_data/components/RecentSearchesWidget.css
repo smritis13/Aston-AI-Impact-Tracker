@@ -1,0 +1,77 @@
+.recent-searches-widget {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  transition: all 0.3s ease;
+}
+
+.recent-searches-widget:hover {
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+.recent-searches-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.recent-search-item {
+  padding: 0.75rem;
+  border: 1px solid #e9ecef;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: #fff;
+}
+
+.recent-search-item:hover {
+  background-color: #f8f9fa;
+  border-color: #dee2e6;
+  transform: translateX(4px);
+}
+
+.search-item-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.search-query {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.search-number {
+  font-weight: 600;
+  color: #6c757d;
+  min-width: 1.5rem;
+  text-align: right;
+}
+
+.search-item-header .badge {
+  flex-shrink: 0;
+  font-size: 0.7rem;
+  padding: 0.3rem 0.6rem;
+}
+
+.search-item-meta {
+  font-size: 0.85rem;
+  color: #6c757d;
+  margin-left: 2rem;
+}
+
+@media (max-width: 768px) {
+  .recent-searches-widget {
+    margin-bottom: 1rem;
+  }
+
+  .recent-search-item {
+    padding: 0.6rem;
+  }
+
+  .search-item-meta {
+    margin-left: 1.5rem;
+  }
+}

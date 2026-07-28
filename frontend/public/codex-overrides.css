@@ -1,0 +1,44 @@
+.prompt-textarea-auto-expand {
+  line-height: 1.5 !important;
+  max-height: 520px !important;
+  min-height: 180px !important;
+  overflow-y: hidden !important;
+  resize: vertical !important;
+}
+
+.prompt-textarea-auto-expand:focus {
+  max-height: 520px !important;
+  min-height: 180px !important;
+  overflow-y: hidden !important;
+  resize: vertical !important;
+}
+
+.selected-prompt .form-control.bg-light {
+  max-height: 520px !important;
+  min-height: 180px !important;
+  overflow-y: auto !important;
+  white-space: pre-wrap !important;
+}
+
+.two-line-description,
+.codex-two-line-description {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-height: 1.45;
+  max-height: 2.9em;
+  overflow: hidden;
+}
+
+.codex-show-more {
+  background: none;
+  border: 0;
+  color: #6ea8fe;
+  cursor: pointer;
+  display: block;
+  font: inherit;
+  font-size: 0.82rem;
+  margin-top: 4px;
+  padding: 0;
+  text-decoration: none;
+}

@@ -1,0 +1,66 @@
+.toast-container {
+  z-index: 1050;
+}
+
+.toast-container.position-fixed {
+  position: fixed !important;
+}
+
+.toast-container.bottom-right {
+  bottom: 0;
+  right: 0;
+  padding: 1rem;
+}
+
+.toast-container.top-right {
+  top: 0;
+  right: 0;
+  padding: 1rem;
+}
+
+.toast-container.top-left {
+  top: 0;
+  left: 0;
+  padding: 1rem;
+}
+
+.toast-container.bottom-left {
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+}
+
+.toast-container.top-center {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 1rem;
+}
+
+.toast-container.bottom-center {
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 1rem;
+}
+
+.toast-container.middle-left {
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  padding: 1rem;
+}
+
+.toast-container.middle-right {
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  padding: 1rem;
+}
+
+.toast-container.middle-center {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 1rem;
+} 

@@ -1,0 +1,16 @@
+.prompt-textarea-auto-expand {
+  min-height: 180px !important;
+  max-height: 520px !important;
+  resize: vertical !important;
+  line-height: 1.5 !important;
+}
+
+.prompt-textarea-auto-expand:focus {
+  min-height: 180px !important;
+  max-height: 520px !important;
+  resize: vertical !important;
+}
+
+.selected-prompt .prompt-textarea-auto-expand {
+  width: 100% !important;
+}

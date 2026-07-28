@@ -1,0 +1,174 @@
+{
+    "edges": [
+        {
+            "id": "start-research",
+            "source": "start",
+            "target": "research"
+        },
+        {
+            "id": "research-analyze",
+            "source": "research",
+            "target": "analyze"
+        },
+        {
+            "id": "analyze-write",
+            "source": "analyze",
+            "target": "write"
+        },
+        {
+            "id": "write-review",
+            "source": "write",
+            "target": "review"
+        },
+        {
+            "id": "review-end",
+            "source": "review",
+            "target": "end"
+        }
+    ],
+    "nodes": [
+        {
+            "id": "start",
+            "data": {
+                "label": "Start",
+                "input_schema": {
+                    "type": "object",
+                    "required": [
+                        "cat_breed",
+                        "report_type"
+                    ],
+                    "properties": {
+                        "cat_breed": {
+                            "type": "string",
+                            "description": "The specific cat breed to research"
+                        },
+                        "report_type": {
+                            "enum": [
+                                "general",
+                                "health",
+                                "behavior"
+                            ],
+                            "type": "string",
+                            "description": "Type of report to generate"
+                        }
+                    }
+                }
+            },
+            "type": "start"
+        },
+        {
+            "id": "research",
+            "data": {
+                "label": "Research",
+                "agent_id": "05eacf5c-d3d5-4d29-b5c3-47004929d3b9",
+                "input_mapping": {
+                    "cat_breed": "input.cat_breed",
+                    "report_type": "input.report_type"
+                },
+                "input_schema": {
+                    "type": "object",
+                    "required": ["cat_breed", "report_type"],
+                    "properties": {
+                        "cat_breed": {"type": "string"},
+                        "report_type": {"type": "string"}
+                    }
+                },
+                "output_schema": {
+                    "type": "object",
+                    "properties": {
+                        "research_data": {"type": "object"}
+                    }
+                }
+            },
+            "type": "process"
+        },
+        {
+            "id": "analyze",
+            "data": {
+                "label": "Analyze",
+                "agent_id": "c48cec96-b51b-4766-bc4f-899d06acfdf6",
+                "input_mapping": {
+                    "research_data": "research.output"
+                },
+                "input_schema": {
+                    "type": "object",
+                    "required": ["research_data"],
+                    "properties": {
+                        "research_data": {"type": "object"}
+                    }
+                },
+                "output_schema": {
+                    "type": "object",
+                    "properties": {
+                        "analyzed_data": {"type": "object"}
+                    }
+                }
+            },
+            "type": "process"
+        },
+        {
+            "id": "write",
+            "data": {
+                "label": "Write Report",
+                "agent_id": "0f4a33b2-53ac-4dd1-a0d4-c5ec34cf4047",
+                "input_mapping": {
+                    "analyzed_data": "analyze.output"
+                },
+                "input_schema": {
+                    "type": "object",
+                    "required": ["analyzed_data"],
+                    "properties": {
+                        "analyzed_data": {"type": "object"}
+                    }
+                },
+                "output_schema": {
+                    "type": "object",
+                    "properties": {
+                        "report": {"type": "string"}
+                    }
+                }
+            },
+            "type": "process"
+        },
+        {
+            "id": "review",
+            "data": {
+                "label": "Review",
+                "agent_id": "44a4cd48-a9ea-40d5-b7e3-aa39456d66b8",
+                "input_mapping": {
+                    "report": "write.output"
+                },
+                "input_schema": {
+                    "type": "object",
+                    "required": ["report"],
+                    "properties": {
+                        "report": {"type": "string"}
+                    }
+                },
+                "output_schema": {
+                    "type": "object",
+                    "properties": {
+                        "final_report": {"type": "string"}
+                    }
+                }
+            },
+            "type": "process"
+        },
+        {
+            "id": "end",
+            "data": {
+                "label": "End",
+                "output_mapping": {
+                    "final_report": "review.output"
+                },
+                "output_schema": {
+                    "type": "object",
+                    "properties": {
+                        "final_report": {"type": "string"}
+                    }
+                }
+            },
+            "type": "end"
+        }
+    ]
+} 

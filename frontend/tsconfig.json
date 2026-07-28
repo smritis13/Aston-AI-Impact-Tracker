@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    // Target modern JS features.
+    "target": "ES6",
+    // Include DOM libs so TypeScript knows about browser APIs.
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    // Allow JavaScript files to be imported (if needed).
+    "allowJs": true,
+    // Skip type checking of .d.ts files in node_modules
+    "skipLibCheck": true,
+    // Enforce strict type checking
+    "strict": true,
+    // Ensure file name casing consistency
+    "forceConsistentCasingInFileNames": true,
+    // Use modern module system
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    // Let TS import JSON files
+    "resolveJsonModule": true,
+    // Treat each file as a separate module (CRA requirement)
+    "isolatedModules": true,
+    // Don’t emit compiled JS (CRA handles bundling)
+    "noEmit": true,
+
+    "esModuleInterop": true,
+    // Enable the new JSX transform in React 17+ / CRA
+    "jsx": "react-jsx",
+
+    // *** The key setting for absolute imports ***
+    "baseUrl": "src",
+    "paths": {
+      "core/*": ["core/*"],
+      "features/*": ["features/*"]
+    }
+  },
+  // Tell TypeScript which folders to include:
+  "include": ["src"]
+}

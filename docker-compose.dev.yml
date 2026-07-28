@@ -1,0 +1,98 @@
+# Development mode - with hot reload
+# Use this for active development: docker-compose -f docker-compose.dev.yml up
+# This runs the React dev server from source and mounts source code for hot reload.
+# It does not depend on frontend/build, so local report data and database volumes
+# are not touched when frontend code changes.
+
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: django-backend-dev
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+      - ./my_index:/app/my_index
+      - /app/__pycache__
+    env_file:
+      - ./backend/.env
+      - ./backend/.env.tavily.local
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_NAME: mydb
+      DB_USER: myuser
+      DB_PASSWORD: mypassword
+      DB_HOST: db
+      DB_PORT: 3306
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-django-insecure-change-this-in-production}
+      DJANGO_DEBUG: ${DJANGO_DEBUG:-True}
+    command: python manage.py runserver 0.0.0.0:8000
+    restart: unless-stopped
+
+  db:
+    image: mysql:8
+    container_name: mysql_db_dev
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_DATABASE=mydb
+      - MYSQL_USER=myuser
+      - MYSQL_PASSWORD=mypassword
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data_dev:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-psecret"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    restart: unless-stopped
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: phpmyadmin_dev
+    depends_on:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_USER: myuser
+      PMA_PASSWORD: mypassword
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    container_name: react-frontend-dev
+    ports:
+      - "3002:3002"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      # Tried polling here to fix flaky bind-mount file-watching, but it hung
+      # the dev server entirely in this environment (high CPU, no progress) -
+      # reverted. If a source edit doesn't seem to appear, restart this
+      # container manually (`docker restart react-frontend-dev`) rather than
+      # enabling polling.
+      CHOKIDAR_USEPOLLING: "false"
+      WATCHPACK_POLLING: "false"
+      FAST_REFRESH: "true"
+      WDS_SOCKET_PORT: "0"
+      WDS_SOCKET_HOST: "0.0.0.0"
+      HOST: "0.0.0.0"
+      REACT_APP_API_URL: "http://localhost:8000"
+    command: npm start
+    restart: unless-stopped
+
+volumes:
+  db_data_dev:
+  frontend_node_modules_dev:

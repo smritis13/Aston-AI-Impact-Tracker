@@ -1,0 +1,26 @@
+# Development Dockerfile - optimized for hot reload
+# Uses npm start with react-scripts for fast development cycle
+
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Copy only package files first
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy the rest of the app
+COPY . .
+
+# Set environment variables
+ENV SKIP_PREFLIGHT_CHECK=true
+ENV TSC_COMPILE_ON_ERROR=true
+ENV GENERATE_SOURCEMAP=false
+
+# Expose port
+EXPOSE 3002
+
+# Start development server with hot reload
+CMD ["npm", "start"]

@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  backend:
+    image: astonaiacr.azurecr.io/django-backend:latest
+    ports:
+      - "8000:8000"
+    environment:
+      DJANGO_SETTINGS_MODULE: config.settings
+      DB_NAME: mydatabase
+      DB_USER: myuser@astonmysql
+      DB_PASSWORD: StrongP@ssword123!
+      DB_HOST: astonmysql.mysql.database.azure.com
+      DB_PORT: 3306
+    command: gunicorn config.wsgi:application --bind 0.0.0.0:8000  --timeout 120 --workers 1
+    
+
+  frontend:
+    image: astonaiacr.azurecr.io/react-frontend:latest
+    ports:
+      - "3001:3001"
+    environment:
+      NODE_ENV: production

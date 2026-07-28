@@ -1,0 +1,12 @@
+Container registry: astonaiacr
+
+
+login to the Container registry:
+    az acr login --name astonaiacr
+
+Then build the frontend container with tha latest tag:
+
+    docker build -t astonaiacr.azurecr.io/react-frontend:latest ./frontend
+
+and push the frontend:
+    docker push astonaiacr.azurecr.io/react-frontend:latest

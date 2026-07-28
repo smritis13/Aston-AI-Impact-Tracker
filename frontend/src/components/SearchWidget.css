@@ -1,0 +1,68 @@
+.search-widget {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.search-widget .input-group {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.search-widget .input-group-text {
+  border: 1px solid #ced4da;
+}
+
+.search-widget .form-control {
+  border: 1px solid #ced4da;
+  padding: 0.5rem 1rem;
+}
+
+.search-widget .form-control:focus {
+  box-shadow: none;
+  border-color: #80bdff;
+}
+
+.search-widget .btn-outline-secondary {
+  border: 1px solid #ced4da;
+  background-color: white;
+  color: #6c757d;
+}
+
+.search-widget .btn-outline-secondary:hover {
+  background-color: #f8f9fa;
+  color: #495057;
+  border-color: #ced4da;
+}
+
+/* Modal styles */
+.modal-content {
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.modal-title {
+  font-weight: 600;
+  color: #212529;
+}
+
+.form-label {
+  font-weight: 500;
+  color: #495057;
+}
+
+.form-select {
+  border-radius: 4px;
+  border: 1px solid #ced4da;
+}
+
+.form-select:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+} 

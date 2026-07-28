@@ -1,0 +1,49 @@
+.markdown-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 0.9rem;
+}
+
+.markdown-content th {
+  background-color: #1e3a5f;
+  color: #ffffff;
+  padding: 8px 12px;
+  text-align: left;
+  font-weight: 600;
+  border: 1px solid #1e3a5f;
+}
+
+.markdown-content td {
+  padding: 7px 12px;
+  border: 1px solid #d1d5db;
+  vertical-align: top;
+  line-height: 1.5;
+}
+
+.markdown-content tr:nth-child(even) td {
+  background-color: #f8f9fa;
+}
+
+.markdown-content tr:hover td {
+  background-color: #eef2ff;
+}
+
+/* Dark theme support */
+html[data-theme-mode="dark"] .markdown-content th {
+  background-color: #1e3a5f;
+  border-color: #2d5a9e;
+}
+
+html[data-theme-mode="dark"] .markdown-content td {
+  border-color: #374151;
+  color: #d1d5db;
+}
+
+html[data-theme-mode="dark"] .markdown-content tr:nth-child(even) td {
+  background-color: #1f2937;
+}
+
+html[data-theme-mode="dark"] .markdown-content tr:hover td {
+  background-color: #1e3a5f33;
+}

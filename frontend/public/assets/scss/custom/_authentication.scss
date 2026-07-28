@@ -1,0 +1,24 @@
+
+[data-theme-mode="dark"] {
+    .authentication {
+        &.authentication-basic {
+            .desktop-dark {
+                display: block;
+            }
+            .desktop-logo {
+                display: none;
+            }
+        }
+        .authentication-brand {
+            &.desktop-logo {
+                display: none;
+            }
+            &.desktop-dark {
+                display: block;
+            }
+        }
+    }
+}
+.under-maintenance-time{
+    color: #fff;
+}
