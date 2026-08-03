@@ -476,7 +476,14 @@ class StructuredReportGenerator:
             "cost", "deployed", "deployment", "evidence", "implemented",
             "implementation", "improved", "million", "national", "patients",
             "policy", "practice", "reduced", "reduction", "report", "saved",
-            "savings", "study", "trial", "users"
+            "savings", "study", "trial", "users",
+            # Advisory/consultancy impact (ethics, legal, policy expertise) rarely
+            # uses deployment language at all - the "product" is a changed
+            # decision or ruling, not a system. Without these, search-result
+            # ranking systematically buries this evidence type before it's ever
+            # scraped, see ref_prompts.py's REJECT exception (c).
+            "advice", "advised", "consulted", "consultation", "guidance",
+            "influenced", "ruling", "testimony", "tribunal", "inquiry", "inquest"
         }
         metric_pattern = re.compile(
             r"(\d[\d,]*(?:\.\d+)?\s*(?:%|percent|million|bn|billion|k|people|patients|users|organisations|organizations|sites|countries|years|months|GBP|USD|EUR))",
@@ -652,7 +659,17 @@ class StructuredReportGenerator:
         if not domain or self._domain_matches(domain, self._BLOCKED_SOURCE_DOMAINS):
             return False
         if self._is_aston_source(use_case.source or ""):
-            return False
+            # Aston-hosted content is never independent, regardless of how it
+            # was categorised - see ref_prompts.py's "Aston-hosted sources"
+            # special case. It may still be used, but only when it clears the
+            # same bar a press release must (an attributable publisher, a
+            # verbatim quote, or a specific reference location) - a blanket
+            # "peer_reviewed"/"policy"/"news" pass below would let through an
+            # Aston page with no checkable statement of its own. The
+            # cross-source dedup priority in _get_or_create_use_case is what
+            # then drops this in favour of an equivalent non-Aston source if
+            # one is found.
+            return bool(use_case.publisher or use_case.direct_quote or use_case.source_reference)
         if content_type in {"peer_reviewed", "policy", "news"}:
             # The credibility/relevance/outcome requirements are enforced
             # separately; these categories permit legitimate specialist
@@ -673,11 +690,17 @@ class StructuredReportGenerator:
 
         Unknown domains are retained for classification; a specialist good
         source should not be lost merely because it was absent from a list.
+        aston.ac.uk is no longer excluded here - it may still carry a unique
+        fact no non-Aston source states, so it needs to be scraped and
+        extracted to find out. _source_quality_score already ranks it below
+        independent sources so scraping budget still goes to those first,
+        and _source_is_ref_trusted + the cross-source dedup priority in
+        _get_or_create_use_case are what keep it from ever being treated as
+        independent evidence or surviving in favour of an equivalent
+        non-Aston duplicate.
         """
         domain = (urlparse(url).netloc or "").lower().removeprefix("www.")
         if not domain or self._domain_matches(domain, self._BLOCKED_SOURCE_DOMAINS):
-            return False
-        if self._is_aston_source(url):
             return False
         return True
 
@@ -2652,6 +2675,14 @@ class StructuredReportGenerator:
         item. Consolidating it prevents one source appearing as multiple
         apparently independent statements.
 
+        Aston-source priority: when a cross-source match pairs an existing
+        aston.ac.uk-hosted row with a new non-Aston one (or vice versa), the
+        non-Aston source always wins and its fields overwrite the existing
+        row, even where the existing row already has non-empty values - see
+        ref_prompts.py's "Aston-hosted sources" special case. This is the
+        only case where a non-empty existing field is overwritten; the
+        merge below is otherwise additive-only (fills gaps, never overwrites).
+
         Returns (use_case_row, is_new).
         """
         new_data = uc.to_dict()
@@ -2687,15 +2718,25 @@ class StructuredReportGenerator:
                     break
 
         if existing:
+            # A non-Aston source always supersedes an Aston-hosted duplicate
+            # of the same claim, whichever was found first - see the
+            # docstring above.
+            non_aston_supersedes = (
+                self._is_aston_source(existing.source or "")
+                and not self._is_aston_source(source or "")
+            )
             update_fields = {"report": self.report_obj, "theme_id": theme_id}
             for key, value in new_data.items():
                 if value in (None, "", []):
                     continue
-                if getattr(existing, key, None) in (None, "", []):
+                if non_aston_supersedes or getattr(existing, key, None) in (None, "", []):
                     update_fields[key] = value
             UseCase.objects.filter(id=existing.id).update(**update_fields)
             existing.refresh_from_db()
-            print(f"[save] DEDUP  id={existing.id}  {(name or '')[:60]}")
+            if non_aston_supersedes:
+                print(f"[dedup] NON-ASTON SUPERSEDES id={existing.id}  {(name or '')[:60]}")
+            else:
+                print(f"[save] DEDUP  id={existing.id}  {(name or '')[:60]}")
             return existing, False
 
         db_use_case = UseCase.objects.create(
@@ -2935,16 +2976,17 @@ class StructuredReportGenerator:
                     uc = ExtractedUseCase(**cleaned_data)
                     uc.domain = (urlparse(page["url"]).netloc or "").lower()
 
-                    # ── Quality gate 0: reject any Aston University source ──
-                    # Fiona's review feedback: prioritise non-Aston sources -
-                    # no aston.ac.uk source (news, repository, staff profile,
-                    # or otherwise) counts as independent evidence. Reject
-                    # before spending any credibility/relevance LLM calls on it.
-                    if self._is_aston_source(page["url"]):
-                        self._stream(
-                            f"Skipping Aston University source (not independent evidence): {page['url'][:80]}"
-                        )
-                        continue
+                    # An aston.ac.uk source is no longer skipped unconditionally
+                    # here (Fiona's earlier "prioritise non-Aston sources"
+                    # feedback, since refined): it may still carry a fact no
+                    # non-Aston source states. _source_is_ref_trusted requires
+                    # it to clear the same bar as a press release (attributable
+                    # publisher, verbatim quote, or specific reference
+                    # location), and it never counts as independent
+                    # corroboration. If a non-Aston source stating the same
+                    # claim is found - now or later - the cross-source dedup
+                    # priority in _get_or_create_use_case supersedes this one
+                    # with it.
 
                     # ── Quality gate 0b: verify direct_quote is actually in the
                     # VISIBLE source text - same anti-hallucination posture as

@@ -266,14 +266,20 @@ index or guess when unsure.
 - ✗ No quantifiable outcome metric (% improvement, $ value, # beneficiaries, policy changes) AND
   no genuine policy-document citation AND no stated real-world adoption/deployment fact. The
   exception to "needs a number" is narrow and specific: (a) a policy/report citation with a
-  locatable `source_reference` and, where possible, a verbatim `direct_quote`, or (b) a plainly
+  locatable `source_reference` and, where possible, a verbatim `direct_quote`, (b) a plainly
   stated adoption fact naming who deployed/adopted what (e.g. "Coventry City Council deployed the
-  system on two junctions"), even without a number attached to it. Being merely reported on,
-  profiled, "featured in", demonstrated at a conference/event, or covered by media does NOT
-  satisfy this exception on its own - that is awareness/promotion, not evidence of adoption or a
-  policy citation, and must be rejected unless it also states a quantified reach (audience size,
-  listener/viewer count, attendee count) or accompanies a genuine deployment fact elsewhere in the
-  same source
+  system on two junctions"), even without a number attached to it, or (c) a named decision-maker
+  stating, in their own words, that they changed a specific decision, ruling, policy position, or
+  conclusion because of the research/advice (e.g. "the National Data Guardian states that Wilson's
+  argument became a central plank of the view I provided to the committee"). (c) matters
+  specifically for advisory/consultancy impact - ethics advice, legal/policy expertise, expert
+  testimony - where the research's entire product is a change in someone's reasoning or ruling, not
+  a deployed system; do not require a deployment-style fact from this kind of evidence just because
+  no system was deployed. Being merely reported on, profiled, "featured in", demonstrated at a
+  conference/event, or covered by media does NOT satisfy this exception on its own - that is
+  awareness/promotion, not evidence of adoption, influence, or a policy citation, and must be
+  rejected unless it also states a quantified reach (audience size, listener/viewer count, attendee
+  count) or accompanies a genuine deployment/influence fact elsewhere in the same source
 - ✗ Purely academic or theoretical (no beyond-academia impact whatsoever)
 - ✗ Pure vendor marketing with no real implementation evidence
 - ✗ Internal-only impacts (no external beneficiary at all)
@@ -282,21 +288,26 @@ index or guess when unsure.
   the named researchers, institutions, or partner organisations — generic industry news about
   unrelated companies does not constitute discoverable evidence for this case study even if
   topically similar
-- ✗ Any source hosted on an aston.ac.uk domain (main site, news, research repository, publications
-  repository, staff profile pages, or any other aston.ac.uk subdomain) — none of these count as
-  independent evidence, even a paper hosted on Aston's own repository; find independent coverage
-  or the publisher/journal/DOI copy of a research output instead
+- ✗ A source hosted on an aston.ac.uk domain (main site, news, research repository, publications
+  repository, staff profile pages, or any other aston.ac.uk subdomain) whose claim — the same
+  beneficiary, outcome, or fact — is also stated by a non-Aston source found for this case study.
+  When both exist, extract from the non-Aston source and discard the Aston-hosted duplicate,
+  including when the duplicate is Aston's own repository copy of a paper that is also available
+  via the publisher/journal/DOI. See "Aston-hosted sources" below for when an aston.ac.uk source
+  may still be extracted.
 
 **ACCEPT if ALL of the following apply:**
 ✓ Topically relevant to the theme and research area (same subject field)
 ✓ At least one identifiable external beneficiary (organisation, sector, community)
 ✓ At least one quantifiable outcome metric (%, £, users, policy adoption, or similar) OR a genuine
   policy-document citation (`source_reference` page/section, ideally with a verbatim
-  `direct_quote`) OR a plainly stated adoption/deployment fact naming who did what - not mere media
-  coverage, a magazine feature, or a conference demo with no reach figure or deployment fact
-  attached (see REJECT above)
-✓ Real implementation evidence: an actual, already-happened deployment or adoption (not only
-  planned or projected, and not just "was covered by" or "was featured in")
+  `direct_quote`) OR a plainly stated adoption/deployment fact naming who did what OR a named
+  decision-maker's own testimony that they changed a decision/ruling/policy position because of
+  the research (the last of these applies to ethics/legal/policy advisory impact specifically - see
+  REJECT exception (c) above) - not mere media coverage, a magazine feature, or a conference demo
+  with no reach figure, deployment fact, or decision-maker testimony attached (see REJECT above)
+✓ Real implementation evidence: an actual, already-happened deployment, adoption, or influenced
+  decision (not only planned or projected, and not just "was covered by" or "was featured in")
 ✓ Beyond-academia impact (external beneficiary exists)
 ✓ Connected to the named researchers, institutions, or partner organisations in the user prompt
   — OR a source that directly attributes or cites findings from that research group
@@ -305,6 +316,15 @@ Note: You do NOT need to verify that this specific university caused the impact 
 However, the evidence must be linkable to the named researchers or their named partners.
 Do not extract impact from companies or organisations that have no stated connection to the
 research group — such records cannot support a REF case study and will be discarded.
+
+**Special case — Aston-hosted sources**: an aston.ac.uk-hosted source (news article, press
+release, staff profile, research repository entry) may be extracted only when it states a
+beneficiary, outcome, or fact that no non-Aston source in this case study's evidence states.
+It is never independent corroboration — mark its evidence as institutional, not third-party,
+for the Evidence Quality/Independent corroboration criterion above — but a genuinely unique
+fact from Aston's own site is still usable evidence, not a reason to discard the finding
+outright. If a non-Aston source is later found stating the same fact, that source takes
+priority: use it in place of the Aston-hosted one rather than keeping both.
 
 **Special case — institutional affiliation records**: if a source states WHEN a named
 researcher joined, left, or was affiliated with Aston or another institution (a LinkedIn-style
@@ -405,10 +425,27 @@ For each valid impact case study, extract:
 
 10. **significance_score** (1-10):
     - Use this internally to judge quality, but output the value as **relevance_score** only if the schema includes it
-    - 1-3: Minor impact, limited reach, weak evidence
-    - 4-6: Moderate impact, regional reach, good evidence
-    - 7-8: Major impact, national reach, strong evidence
-    - 9-10: Transformative impact, international reach, excellent evidence
+    - Judge magnitude and evidence strength relative to what is plausible for
+      this research's own subject and beneficiary population. REF panels score
+      reach/significance against the context and audience the research
+      addresses, not against a universal geographic ladder - a single-borough
+      policy reform, a national professional-body guideline change, and a
+      genuinely international rollout can each score 9-10 if the evidence
+      shows it is the maximum plausible reach/significance for that specific
+      impact, and each can equally score 1-3 if the evidence is thin,
+      regardless of scale. A real REF2021 4* case study can rest entirely on
+      one country's inquest system or one London borough's community
+      programme - narrower footprint alone must never cap the score.
+    - 1-3: Minor impact, weak or unstated evidence, no clear beneficiary
+    - 4-6: Moderate impact for its context, credible but incomplete evidence
+    - 7-8: Major impact for its context, strong and specific evidence
+    - 9-10: Transformative impact for its context (the maximum plausible reach
+      and significance for this subject/beneficiary population), excellent,
+      well-corroborated evidence
+    - State the geographic/organisational scale (local, regional, national,
+      international) as a factual description of the reach in the extracted
+      fields - it is not itself a scoring input, and must not be used to infer
+      or justify the score in either direction
 
 11. **use_case_date**:
     - When impact was achieved/deployed (YYYY-MM-DD)

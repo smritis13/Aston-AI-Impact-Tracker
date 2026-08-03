@@ -354,6 +354,13 @@ class ReportDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ReportSerializer
 
 class ReportPdfExportView(APIView):
+    # Fiona/Brenda/Kate's review feedback: the REF Readiness Assessment table's
+    # "Current strength" column implies a level of judgement that doesn't hold
+    # across Units of Assessment. Hidden rather than removed from the
+    # generation prompt (ref_prompts.py) - flip back to True to restore it
+    # without any data loss, since the underlying report content is untouched.
+    SHOW_REF_STRENGTH_COLUMN = False
+
     _PDF_CSS = """
         @page {
             size: A4;
@@ -510,7 +517,10 @@ class ReportPdfExportView(APIView):
         # Older reports have a redundant "Where to check" column baked into
         # their stored content (duplicate of the Link column). Strip it from
         # any table, regardless of column count/position, before layout.
-        html = self._strip_columns_by_header(html, ["where to check"])
+        strip_headers = ["where to check"]
+        if not self.SHOW_REF_STRENGTH_COLUMN:
+            strip_headers.append("current strength")
+        html = self._strip_columns_by_header(html, strip_headers)
         # xhtml2pdf's table renderer does not reliably wrap or clip long unbroken
         # tokens (raw URLs, whether linked or plain text) inside table cells - they
         # overflow into neighbouring cells instead. Shorten any such token so it

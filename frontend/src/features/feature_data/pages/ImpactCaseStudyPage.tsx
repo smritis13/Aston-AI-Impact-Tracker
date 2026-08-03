@@ -93,6 +93,63 @@ interface ReportCompleteness {
   stopped_reason: string;
 }
 
+// Fiona/Brenda/Kate's review feedback: the REF Readiness Assessment table's
+// "Current strength" column implies a level of judgement that doesn't hold
+// across Units of Assessment. Hidden rather than removed from the generation
+// prompt (ref_prompts.py) - flip back to true to restore it, no data loss.
+const SHOW_REF_STRENGTH_COLUMN = false;
+
+/**
+ * Removes any column whose header cell text matches one of headerNames
+ * (case-insensitive) from a raw Markdown pipe-table (the "REF Readiness
+ * Assessment" table is plain Markdown, not embedded HTML).
+ */
+const stripMarkdownTableColumn = (content: string, headerNames: string[]): string => {
+  const targets = new Set(headerNames.map((h) => h.toLowerCase()));
+  const isTableRow = (line: string) => /^\s*\|.*\|\s*$/.test(line);
+  const isSeparatorRow = (line: string) => /^\s*\|?(\s*:?-+:?\s*\|)+\s*:?-+:?\s*\|?\s*$/.test(line);
+  const splitCells = (line: string) =>
+    line.trim().replace(/^\|/, "").replace(/\|$/, "").split("|").map((c) => c.trim());
+  const joinCells = (cells: string[]) => `| ${cells.join(" | ")} |`;
+
+  const lines = content.split("\n");
+  const result: string[] = [];
+  let dropIndex: number | null = null;
+  let inTable = false;
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    const next = lines[i + 1];
+    if (!inTable && isTableRow(line) && next !== undefined && isSeparatorRow(next)) {
+      inTable = true;
+      const headerCells = splitCells(line);
+      dropIndex = headerCells.findIndex((c) => targets.has(c.toLowerCase()));
+      if (dropIndex === -1) {
+        result.push(line);
+      } else {
+        const cells = [...headerCells];
+        cells.splice(dropIndex, 1);
+        result.push(joinCells(cells));
+      }
+      continue;
+    }
+    if (inTable && (isTableRow(line) || isSeparatorRow(line))) {
+      if (dropIndex === null || dropIndex === -1) {
+        result.push(line);
+      } else {
+        const cells = splitCells(line);
+        if (dropIndex < cells.length) cells.splice(dropIndex, 1);
+        result.push(joinCells(cells));
+      }
+      continue;
+    }
+    inTable = false;
+    dropIndex = null;
+    result.push(line);
+  }
+  return result.join("\n");
+};
+
 // Maps the backend's machine-readable stopped_reason codes (see
 // _record_completeness in structured_report_generator.py) to a short,
 // reviewer-facing explanation.
@@ -483,7 +540,9 @@ const ImpactCaseStudyPage: React.FC = () => {
                               REF Readiness Commentary
                             </h6>
                             <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
-                              {commentarySection}
+                              {SHOW_REF_STRENGTH_COLUMN
+                                ? commentarySection
+                                : stripMarkdownTableColumn(commentarySection, ["current strength"])}
                             </ReactMarkdown>
                           </div>
                         )}
