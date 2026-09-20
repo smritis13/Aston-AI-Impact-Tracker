@@ -1,6 +1,6 @@
 # Docker Rebuild Guide - Correct Steps
 
-## ⚡ Quick Reference
+## Quick Reference
 
 ### Production Build (Recommended for most use cases)
 ```bash
@@ -20,7 +20,7 @@ docker-compose -f docker-compose.dev.yml up --build
 
 ---
 
-## 🔧 Full Rebuild Procedure (Production)
+## Full Rebuild Procedure (Production)
 
 ### Step 1: Stop All Containers
 ```bash
@@ -60,7 +60,7 @@ curl http://localhost:8000  # Should return HTTP 200
 
 ---
 
-## 🚀 Development With Hot Reload
+## Development With Hot Reload
 
 ### Setup for Development
 ```bash
@@ -69,10 +69,10 @@ docker-compose -f docker-compose.dev.yml up --build -d
 ```
 
 **What this gives you:**
-- ✅ Hot reload - changes to src/ reflected instantly
-- ✅ Faster startup (npm start vs npm run build)
-- ✅ Better error messages in console
-- ❌ Not optimized for production
+- Hot reload - changes to src/ reflected instantly
+- Faster startup (npm start vs npm run build)
+- Better error messages in console
+- Not optimized for production
 
 ### Stop Dev Services
 ```bash
@@ -81,7 +81,7 @@ docker-compose -f docker-compose.dev.yml down
 
 ---
 
-## 📋 Why These Changes Were Made
+## Why These Changes Were Made
 
 ### Before (Broken Config)
 ```yaml
@@ -112,7 +112,7 @@ volumes:
 
 ---
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Frontend shows "Connection refused"
 ```bash
@@ -157,23 +157,23 @@ docker logs django-backend
 
 ---
 
-## 📁 Directory Structure After Fix
+## Directory Structure After Fix
 
 ```
 .
-├── docker-compose.yml          ✅ Production (fixed)
-├── docker-compose.dev.yml      ✅ Development (new)
+├── docker-compose.yml Production (fixed)
+├── docker-compose.dev.yml Development (new)
 ├── backend/
 │   └── Dockerfile              (unchanged)
 ├── frontend/
-│   ├── Dockerfile              ✅ (unchanged - production)
-│   └── Dockerfile.dev          ✅ (new - development)
+│   ├── Dockerfile (unchanged - production)
+│   └── Dockerfile.dev (new - development)
 └── ...
 ```
 
 ---
 
-## ✅ What Finally Worked
+## What Finally Worked
 
 1. **Fixed TypeScript Type**: Added `credibility_score` to UseCase interface
 2. **Fixed docker-compose.yml**: Removed double build, removed conflicting volumes
@@ -182,16 +182,16 @@ docker logs django-backend
 
 ---
 
-## 🎯 Best Practices Going Forward
+## Best Practices Going Forward
 
-✅ **DO:**
+**DO:**
 - Use `docker-compose down` before major changes
 - Run `docker-compose up --build` after changing package.json
 - Use `docker-compose.dev.yml` for active development
 - Check `docker ps` before assuming services are ready
 - Monitor with `docker logs -f <container_name>`
 
-❌ **DON'T:**
+**DON'T:**
 - Don't rebuild (up --build) every time - only when needed
 - Don't mount entire directories over pre-built images unless intentional
 - Don't run build commands in startup scripts (build in Dockerfile instead)
@@ -199,7 +199,7 @@ docker logs django-backend
 
 ---
 
-## 📞 Quick Command Cheat Sheet
+## Quick Command Cheat Sheet
 
 ```bash
 # Start everything

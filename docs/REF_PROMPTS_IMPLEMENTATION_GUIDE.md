@@ -91,14 +91,14 @@ else:
 ## Key Improvements in REF Prompts
 
 ### 1. Reach Validation
-**Before**: "Beneficiary type mentioned" ❌  
+**Before**: "Beneficiary type mentioned"  
 **After**: 
 - Specific beneficiary count (e.g., "500+ patients")
 - Geographic scope ("UK-wide", "European Union")
 - Beneficiary type ("Healthcare professionals, patients, policy makers")
 
 ### 2. Significance Validation
-**Before**: "Outcome mentioned" ❌  
+**Before**: "Outcome mentioned"  
 **After**:
 - MUST have quantified metric (%, £, user count, policy change)
 - MUST be meaningful (>5% improvement or similar)
@@ -106,7 +106,7 @@ else:
 - Examples given for each impact type
 
 ### 3. Evidence Quality
-**Before**: "Source mentioned" ❌  
+**Before**: "Source mentioned"  
 **After**:
 - Independent verification (third-party sources)
 - Specific citable URLs or publications
@@ -114,7 +114,7 @@ else:
 - No vendor marketing or unverifiable claims
 
 ### 4. Beyond-Academia Filter
-**Before**: "External application mentioned" ❌  
+**Before**: "External application mentioned"  
 **After**:
 - MUST have external beneficiary (not just academic publication)
 - MUST show real-world change (adoption, policy, behavioral change)
@@ -190,19 +190,19 @@ When using the prompts, impact_type should be one of:
 
 ### Test Case 1: Strong REF Case Study
 **Input**: "Healthcare AI tool adopted by 500+ NHS patients with 40% faster diagnosis"  
-**Expected**: ✅ Full extraction with significance_score 8-10
+**Expected**: Full extraction with significance_score 8-10
 
 ### Test Case 2: Weak Case Study (Missing Reach)
 **Input**: "Company A used AI tools to improve efficiency"  
-**Expected**: ❌ Rejected - no quantified beneficiary count
+**Expected**: Rejected - no quantified beneficiary count
 
 ### Test Case 3: Weak Case Study (Purely Academic)
 **Input**: "Researchers published findings on AI applications"  
-**Expected**: ❌ Rejected - no beyond-academia impact
+**Expected**: Rejected - no beyond-academia impact
 
 ### Test Case 4: Policy Impact
 **Input**: "Research influenced EU Green Deal policy affecting 450+ million citizens"  
-**Expected**: ✅ Full extraction with significance_score 9-10
+**Expected**: Full extraction with significance_score 9-10
 
 ## Monitoring Impact Quality
 

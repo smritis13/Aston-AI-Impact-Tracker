@@ -1,10 +1,10 @@
 # Database Persistence & Backup Guide
 
-## ⚠️ Important: Preventing Data Loss
+## Important: Preventing Data Loss
 
 Your database data is stored in a Docker volume called `db_data`. To prevent losing your data during rebuilds:
 
-### ❌ DO NOT Run These Commands
+### DO NOT Run These Commands
 ```bash
 # These WILL DELETE your data!
 docker compose down -v
@@ -12,7 +12,7 @@ docker volume rm db_data
 docker volume prune
 ```
 
-### ✅ DO Run These Commands
+### DO Run These Commands
 
 #### Option 1: Safe Rebuild (Recommended)
 ```bash
@@ -33,7 +33,7 @@ docker compose down
 docker compose up --build
 ```
 
-## 📊 Backup & Restore Scripts
+## Backup & Restore Scripts
 
 ### Backup Your Database
 ```bash
@@ -51,7 +51,7 @@ Backups are stored in `.\database_backups\` with timestamps.
 .\restore-database.ps1 -BackupFile ".\database_backups\mydb_backup_20260527_120000.sql"
 ```
 
-## 📁 Database Volume Persistence
+## Database Volume Persistence
 
 Your Docker setup uses named volumes for data persistence:
 
@@ -70,7 +70,7 @@ docker volume ls
 docker volume inspect db_data
 ```
 
-## 🔄 Workflow: Safe Development & Rebuilds
+## Workflow: Safe Development & Rebuilds
 
 1. **Before Major Changes**
    ```bash
@@ -87,17 +87,17 @@ docker volume inspect db_data
    .\restore-database.ps1
    ```
 
-## 📋 What Gets Persisted
+## What Gets Persisted
 
-✅ Persisted (Saved Between Rebuilds):
+Persisted (Saved Between Rebuilds):
 - MySQL database (all reports, use cases, themes)
 - All uploaded data
 
-❌ Not Persisted (Reset on Rebuild):
+Not Persisted (Reset on Rebuild):
 - Docker container logs
 - Temp files in `/tmp`
 
-## 🆘 Emergency Recovery
+## Emergency Recovery
 
 If you accidentally deleted a volume:
 
@@ -115,7 +115,7 @@ If you accidentally deleted a volume:
    - Your data may be recoverable from Docker volume backups
    - Contact support with your situation
 
-## 🎯 Best Practices
+## Best Practices
 
 1. **Always backup before major changes**
    ```bash
@@ -124,10 +124,10 @@ If you accidentally deleted a volume:
 
 2. **Use `docker compose down` (not `down -v`)**
    ```bash
-   # ✅ Good - preserves data
+   # Good - preserves data
    docker compose down
    
-   # ❌ Bad - deletes data
+   # Bad - deletes data
    docker compose down -v
    ```
 
@@ -135,7 +135,7 @@ If you accidentally deleted a volume:
    - Consider setting up automated nightly backups
    - Keep multiple backup versions
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 **Q: My data disappeared after rebuild!**
 - A: Check if you ran `docker compose down -v` - this deletes volumes
@@ -153,7 +153,7 @@ If you accidentally deleted a volume:
   docker exec mysql_db mysqladmin ping -u root -psecret
   ```
 
-## 📞 Quick Commands Reference
+## Quick Commands Reference
 
 ```bash
 # View database contents

@@ -5,20 +5,20 @@ This document explains how to ensure your database data persists between Docker 
 
 ## Important: Preserving Data
 
-### ✅ How Data Persists (Default Behavior)
+### How Data Persists (Default Behavior)
 - **MySQL Database**: Uses Docker named volume `db_data:/var/lib/mysql`
 - **Reports & Searches**: All stored in the persistent MySQL database
 - **Use Cases**: Linked to reports and stored persistently
 - **Restart Policy**: Services use `restart: unless-stopped` to automatically recover
 
-### ⚠️ How Data Gets Deleted
+### How Data Gets Deleted
 Data is **permanently deleted** when you run:
 ```bash
 docker-compose down -v
 ```
 The `-v` flag removes all named volumes.
 
-### ✅ Safe Operations (Data Preserved)
+### Safe Operations (Data Preserved)
 These operations keep your data:
 ```bash
 # Restart containers (data stays)
@@ -36,7 +36,7 @@ docker-compose down
 docker-compose up
 ```
 
-### ❌ Operations That Delete Data
+### Operations That Delete Data
 ```bash
 # This DELETES all data permanently
 docker-compose down -v

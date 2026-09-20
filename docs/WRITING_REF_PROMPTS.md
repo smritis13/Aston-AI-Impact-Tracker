@@ -16,8 +16,8 @@ You must answer clearly:
 - What type? (patients, companies, government, communities)
 - Where? (local, national, international)
 
-❌ **Poor**: "The tool was adopted by several organizations"  
-✅ **Good**: "500+ NHS patients benefited across 12 hospital departments in the UK"
+**Poor**: "The tool was adopted by several organizations"  
+**Good**: "500+ NHS patients benefited across 12 hospital departments in the UK"
 
 ### 2. **SIGNIFICANCE** - How Much Did It Matter?
 You must show quantifiable change:
@@ -28,18 +28,20 @@ You must show quantifiable change:
 - Lives improved
 - Duration of impact (months/years)
 
-❌ **Poor**: "Improved efficiency"  
-✅ **Good**: "Reduced diagnostic time by 40% (3 weeks faster), enabling earlier treatment for 500+ patients annually. Documented £2 million cost savings over 18 months."
+**Poor**: "Improved efficiency"  
+**Good**: "Reduced diagnostic time by 40% (3 weeks faster), enabling earlier treatment for 500+ patients annually. Documented £2 million cost savings over 18 months."
 
 ### 3. **EVIDENCE** - How Do You Know It Worked?
-Your impact must be verifiable:
-- Published in peer-reviewed journal ✓
-- Case study from reputable source ✓
-- Policy document or government report ✓
-- Independent media coverage ✓
-- University/hospital verification ✓
-- ❌ Vendor marketing claims alone ❌
-- ❌ Unverifiable internal reports ❌
+Your impact must be verifiable. The following count as evidence:
+- Published in a peer-reviewed journal
+- A case study from a reputable source
+- A policy document or government report
+- Independent media coverage
+- University or hospital verification
+
+The following do not:
+- Vendor marketing claims on their own
+- Unverifiable internal reports
 
 ---
 
@@ -54,12 +56,12 @@ Your impact must be verifiable:
 
 **Examples:**
 
-❌ **Weak Prompts**:
+**Weak Prompts**:
 - "AI in healthcare"
 - "Renewable energy research"
 - "Blockchain applications"
 
-✅ **Strong Prompts**:
+**Strong Prompts**:
 - "AI diagnostic tools adopted by healthcare providers with documented patient outcome improvements (>5% accuracy gain, >100 patients)"
 - "Renewable energy cost reduction studies with documented adoption by companies/utilities (>15% cost reduction, >50 organizations)"
 - "Blockchain supply chain implementations with documented benefit metrics (time saved, cost reduction, adoption by enterprises)"
@@ -87,13 +89,13 @@ published case studies or white papers, implemented 2023-2024"
 
 Be clear about WHO benefits:
 
-✅ **Good**:
+**Good**:
 - "Patient impact: faster diagnosis, improved outcomes"
 - "Healthcare worker impact: reduced administrative burden"
 - "Hospital impact: cost savings, efficiency gains"
 - "Policy impact: government regulations adopted"
 
-❌ **Bad**:
+**Bad**:
 - "General impact" (too vague)
 - "Internal use only" (not REF-eligible)
 - "Theoretical application" (not verified)
@@ -121,16 +123,16 @@ For each case study the tool generates, verify:
 
 | Criterion | REF Requirement | Your Case Study |
 |-----------|-----------------|-----------------|
-| **Beneficiary Type** | Named external organization/community? | ☐ Yes ☐ No |
-| **Beneficiary Count** | Specific number or range (not "several")? | ☐ Yes ☐ No |
-| **Geographic Scope** | Location clear (local/national/international)? | ☐ Yes ☐ No |
-| **Quantified Outcome** | At least one metric (%, £, time, adoption rate)? | ☐ Yes ☐ No |
-| **Outcome Scale** | Is it meaningful (>5% improvement or £100K+)? | ☐ Yes ☐ No |
-| **Duration** | Evidence of sustained impact (>6 months)? | ☐ Yes ☐ No |
-| **Beyond-Academia** | Real-world external impact (not just publication)? | ☐ Yes ☐ No |
-| **Verifiable Source** | Published, documented, or independently verified? | ☐ Yes ☐ No |
+| **Beneficiary Type** | Named external organization/community? | Yes / No |
+| **Beneficiary Count** | Specific number or range (not "several")? | Yes / No |
+| **Geographic Scope** | Location clear (local/national/international)? | Yes / No |
+| **Quantified Outcome** | At least one metric (%, £, time, adoption rate)? | Yes / No |
+| **Outcome Scale** | Is it meaningful (>5% improvement or £100K+)? | Yes / No |
+| **Duration** | Evidence of sustained impact (>6 months)? | Yes / No |
+| **Beyond-Academia** | Real-world external impact (not just publication)? | Yes / No |
+| **Verifiable Source** | Published, documented, or independently verified? | Yes / No |
 
-✅ **All checks YES?** = REF-Quality case study!
+**All checks YES?** = REF-Quality case study!
 
 ---
 
@@ -148,7 +150,7 @@ For each case study the tool generates, verify:
 | **Economic Impact** | £2 million cost savings vs. manual screening |
 | **Evidence** | Published in The Lancet Digital Health 2024; NHS case study; Press release with hospital verification |
 | **Duration** | Deployed 2022-2024; 8/10 hospitals continued post-pilot |
-| **REF Grade** | ⭐⭐⭐⭐⭐ (9/10) |
+| **REF Grade** | 9/10 |
 
 ### Example 2: Policy Impact (Strong)
 
@@ -162,7 +164,7 @@ For each case study the tool generates, verify:
 | **Economic Impact** | €100+ billion renewable energy investment triggered |
 | **Evidence** | Official EU policy document (Green Deal 2023); 40+ government citations of research; Published in Nature Energy 2023 |
 | **Duration** | Policy adoption 2023, ongoing implementation |
-| **REF Grade** | ⭐⭐⭐⭐⭐ (10/10) |
+| **REF Grade** | 10/10 |
 
 ### Example 3: Weak Case Study (NOT REF-Quality)
 
@@ -176,7 +178,7 @@ For each case study the tool generates, verify:
 | **Economic Impact** | Not stated |
 | **Evidence** | Vendor marketing material only |
 | **Duration** | Unclear |
-| **REF Grade** | ⭐ (2/10 - REJECTED) |
+| **REF Grade** | 2/10, rejected |
 
 ---
 
@@ -214,23 +216,23 @@ evidence from policy documents and [>2 independent sources], [2022-2024]"
 
 ## Common Mistakes to Avoid
 
-### ❌ Mistake 1: Too Vague
+### Mistake 1: Too Vague
 **Bad**: "AI is being used in finance"  
 **Fix**: Add specifics: "JPMorgan uses AI to process 10,000 loan applications daily, reducing review time by 60%, reaching 100,000+ applicants annually"
 
-### ❌ Mistake 2: No Numbers
+### Mistake 2: No Numbers
 **Bad**: "Tool improves productivity"  
 **Fix**: Add metrics: "Tool reduced processing time from 2 hours to 30 minutes (75% improvement), deployed across 5 departments, affecting 200+ employees daily"
 
-### ❌ Mistake 3: Only Internal Impact
+### Mistake 3: Only Internal Impact
 **Bad**: "Our team used it internally"  
 **Fix**: Specify external benefit: "Our team used it to serve 10,000 external customers, reducing their costs by £5 million annually"
 
-### ❌ Mistake 4: Only Academic
+### Mistake 4: Only Academic
 **Bad**: "We published a paper on this technology"  
 **Fix**: Show real-world use: "Our research was adopted by 50 organizations, leading to 30% efficiency improvement across the sector"
 
-### ❌ Mistake 5: Unverifiable Claims
+### Mistake 5: Unverifiable Claims
 **Bad**: "Tool reportedly improved outcomes"  
 **Fix**: Add evidence: "Tool improvement documented in peer-reviewed publication (Journal X, 2024) and verified case study from Hospital Y"
 
@@ -240,11 +242,11 @@ evidence from policy documents and [>2 independent sources], [2022-2024]"
 
 With the updated REF-focused features, the Aston AI Research Tool will:
 
-✅ **Search strategically** for case studies with quantified impacts  
-✅ **Extract carefully** enforcing Reach + Significance + Evidence criteria  
-✅ **Score systematically** assigning REF-alignment scores (0-10)  
-✅ **Validate thoroughly** rejecting generic or unverifiable claims  
-✅ **Present professionally** with structured fields matching REF requirements  
+**Search strategically** for case studies with quantified impacts  
+**Extract carefully** enforcing Reach + Significance + Evidence criteria  
+**Score systematically** assigning REF-alignment scores (0-10)  
+**Validate thoroughly** rejecting generic or unverifiable claims  
+**Present professionally** with structured fields matching REF requirements  
 
 ---
 
@@ -260,7 +262,7 @@ Before finalizing your case study:
 - [ ] Do I have evidence from >1 independent source? (not just vendor marketing)
 - [ ] Have I described what changed, for whom, and by how much?
 
-**All YES?** → Submit with confidence! ✅
+**All YES?** → Submit with confidence!
 
 ---
 
@@ -305,11 +307,11 @@ A: Even small-scale impacts count if they're well-documented and verifiable. 20 
 
 After using this enhanced tool, you should see:
 
-✅ Higher significance scores (aim for 7+/10 on REF scale)  
-✅ More quantified outcomes (target: 95%+ have metrics)  
-✅ Clearer beneficiary identification (target: 100% have named beneficiaries)  
-✅ Better evidence quality (target: 90%+ have verifiable sources)  
-✅ More REF-compliant case studies (target: 85%+ pass REF criteria)  
+Higher significance scores (aim for 7+/10 on REF scale)  
+More quantified outcomes (target: 95%+ have metrics)  
+Clearer beneficiary identification (target: 100% have named beneficiaries)  
+Better evidence quality (target: 90%+ have verifiable sources)  
+More REF-compliant case studies (target: 85%+ pass REF criteria)  
 
 ---
 
